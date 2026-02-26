@@ -1,0 +1,38 @@
+GET http://localhost:8080/Question/allQuestions
+Accept: application/json
+
+GET http://localhost:8080/Question/category/java
+
+Accept: application/json
+
+POST http://localhost:8080/Question/add
+Content-Type: application/json
+
+{
+  "questionTitle": "What is polymorphism in Java?",
+  "option1":"A feature that allows methods to do different things based on the object it is acting upon",
+  "option2":"A way to store multiple values in a single variable",
+  "option3":"A mechanism to restrict access to certain parts of code",
+  "option4":"A process of converting one data type to another",
+  "rightAnswer": "A feature that allows methods to do different things based on the object it is acting upon",
+  "difficultyLevel": "medium",
+  "category": "java"
+}
+
+POST http://localhost:8080/Question/add
+Content-Type: application/json
+
+{
+  "questionTitle": "What is Java?",
+  "option1": "Language",
+  "option2": "Database",
+  "option3": "OS",
+  "option4": "Browser",
+  "rightAnswer": "Language",
+  "difficultyLevel": "easy",
+  "category": "Programming"
+}
+
+POST http://localhost:8080/quiz/create?category=java&numberOfQuestions=5&title=JQuiz
+
+GET  http://localhost:8080/quiz/get/1
