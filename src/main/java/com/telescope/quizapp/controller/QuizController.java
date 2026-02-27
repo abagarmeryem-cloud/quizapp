@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.telescope.quizapp.Model.QuestionWrapper;
+import com.telescope.quizapp.Model.Response;
 import com.telescope.quizapp.service.QuizService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
@@ -31,7 +32,12 @@ public class QuizController {
     @GetMapping("get/{id}")
     public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(@PathVariable Long id) {
         return quizService.getQuizQuestions(id);
-         
     }
+
+    @PostMapping("submit/{id")
+    public ResponseEntity<Integer> submitRequest(@PathVariable Long id,@RequestBody List<Response> responses) {
+        return quizService.calculateResult(id,responses);
+    }
+    
     
 }

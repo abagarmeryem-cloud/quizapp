@@ -2,7 +2,6 @@ GET http://localhost:8080/Question/allQuestions
 Accept: application/json
 
 GET http://localhost:8080/Question/category/java
-
 Accept: application/json
 
 POST http://localhost:8080/Question/add
@@ -30,9 +29,11 @@ Content-Type: application/json
   "option4": "Browser",
   "rightAnswer": "Language",
   "difficultyLevel": "easy",
-  "category": "Programming"
+  "category": "programming"
 }
 
-POST http://localhost:8080/quiz/create?category=java&numberOfQuestions=5&title=JQuiz
+POST http://localhost:8080/quiz/create?category=java&numberOfQuestions=5&title=JavaQuiz
 
-GET  http://localhost:8080/quiz/get/1
+GET  http://localhost:8080/quiz/get/5
+
+POST http://localhost:8080/quiz/submit/1
