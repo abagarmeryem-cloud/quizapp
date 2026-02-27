@@ -2,6 +2,9 @@ package com.telescope.quizapp.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -54,17 +57,29 @@ public class QuizService {
         return new ResponseEntity<List<QuestionWrapper>>(questionForUser, HttpStatus.OK);
     }
 
-    public ResponseEntity<Integer> calculateResult(Long id, List<Response> responses) {
-        Quiz quiz=quizdao.findById(id).get();
-        List<Question> questions=quiz.getQuestions();
-        int right=0;
-        int i=0;
-        for (Response response : responses) {
-            if (response.getResponse().equals(questions.get(i).getRightAnswer())) {
-                right++;
-            }
-            i++;
-        }
-        return new ResponseEntity<Integer>(right, HttpStatus.OK);
+    public ResponseEntity<Integer> calculateResult(Long quizId, List<Response> responses) {
+
+    Optional<Quiz> optionalQuiz = quizdao.findById(quizId);
+    if (optionalQuiz.isEmpty()) {
+        return new ResponseEntity<>(0, HttpStatus.NOT_FOUND);
     }
+
+    Quiz quiz = optionalQuiz.get();
+    List<Question> questions = quiz.getQuestions();
+
+    // Map questionId -> bonne réponse
+    Map<Long, String> correctAnswers = questions.stream()
+        .collect(Collectors.toMap(Question::getId, Question::getRightAnswer));
+
+    // Compte les bonnes réponses
+    int right = 0;
+    for (Response response : responses) {
+        String correct = correctAnswers.get(response.getId());
+        if (correct != null && correct.equals(response.getResponse())) {
+            right++;
+        }
+    }
+
+    return ResponseEntity.ok(right);
+}
 }

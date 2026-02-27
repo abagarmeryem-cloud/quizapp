@@ -34,6 +34,15 @@ Content-Type: application/json
 
 POST http://localhost:8080/quiz/create?category=java&numberOfQuestions=5&title=JavaQuiz
 
-GET  http://localhost:8080/quiz/get/5
+GET  http://localhost:8080/quiz/get/2
 
-POST http://localhost:8080/quiz/submit/1
+POST http://localhost:8080/quiz/submit/2
+Content-Type: application/json
+
+[
+  {"id": 16, "response":"To include external modules"},
+  {"id": 14, "response":"class"},
+  {"id": 26, "response":"To indicate an empty code block"},
+  {"id": 3, "response":"A built-in function"},
+  {"id": 24, "response":"To indicate an empty code block"}
+]

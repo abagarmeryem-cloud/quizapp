@@ -29,12 +29,12 @@ public class QuizController {
         return quizService.createQuiz(category, numberOfQuestions, title);
     }
 
-    @GetMapping("get/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(@PathVariable Long id) {
         return quizService.getQuizQuestions(id);
     }
 
-    @PostMapping("submit/{id")
+    @PostMapping("/submit/{id}")
     public ResponseEntity<Integer> submitRequest(@PathVariable Long id,@RequestBody List<Response> responses) {
         return quizService.calculateResult(id,responses);
     }

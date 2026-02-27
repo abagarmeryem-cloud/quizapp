@@ -37,7 +37,7 @@ public class QuestionController {
         return new ResponseEntity<List<Question>>(questionService.getByCategory(catgr), HttpStatus.OK);
     }
 
-    @PostMapping("add")
+    @PostMapping("/add")
     public ResponseEntity<String> addQuestion(@RequestBody Question question) {
         questionService.addQuestion(question);
         return new ResponseEntity<String>("Succès", HttpStatus.CREATED);
